@@ -1,0 +1,32 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  humanizer api
+
+Globals:
+  Function:
+    Timeout: 120
+
+Resources:
+  HelloWorldFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/hello_world/
+      Handler: app.lambda_handler
+      Runtime: python3.12
+      Architectures:
+        - x86_64
+      FunctionUrlConfig:
+        AuthType: NONE 
+
+Outputs:
+# HelloWord
+  HelloWorldFunctionUrl:
+    Description: "URL for the Hello World Lambda function"
+    Value: !GetAtt HelloWorldFunctionUrl.FunctionUrl
+  HelloWorldFunction:
+    Description: "Hello World Lambda Function ARN"
+    Value: !GetAtt HelloWorldFunction.Arn
+  HelloWorldFunctionIamRole:
+    Description: "Implicit IAM Role created for Hello World function"
+    Value: !GetAtt HelloWorldFunctionRole.Arn
